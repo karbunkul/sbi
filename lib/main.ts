@@ -2,15 +2,22 @@
 
 import {isUndefined} from "util";
 import {resolveTxt} from "dns";
+import events = require('events');
+
+export interface ISBIEvent {
+    on(event: 'set', listener: (box: BoxBase) => void): this;
+    on(event: string, listener: Function): this;
+}
 
 /**
  * Storage Box Item
  */
-export default class SBI {
+export default class SBI extends events.EventEmitter implements ISBIEvent {
     /**
      * Constructor
      */
     constructor() {
+        super();
         // create storage object if not exist
         if (isUndefined((<any>process).sbi)) {
             Object.defineProperty(process, 'sbi', {
@@ -72,6 +79,7 @@ export default class SBI {
         if (storage) {
             storage[box.key] = boxObj;
         }
+        this.emit('set', boxObj);
         return boxObj;
     }
 
@@ -118,6 +126,10 @@ export class BoxBase {
      */
     public item(key?: string): any {
         return (!isUndefined(key)) ? this._items[key] : this._value;
+    }
+
+    public itemTypeOf<T>(key?: string): T {
+        return this.item(key) as T;
     }
 
     /**

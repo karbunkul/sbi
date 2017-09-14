@@ -5,7 +5,7 @@
   "main": "dist/lib/main.js",
   "types": "dist/lib/main.d.ts",
   "scripts": {
-    "start": "nodemon --exec ts-node app.ts",
+    "start": "nodemon --inspect --exec ts-node app.ts",
     "prepublishOnly": "npm run declaration",
     "declaration": "tsc"
   },
