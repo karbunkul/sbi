@@ -1,6 +1,6 @@
 {
   "name": "sbi",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/lib/main.js",
   "types": "dist/lib/main.d.ts",

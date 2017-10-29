@@ -1,11 +1,10 @@
 /* jshint esversion:6 */
 
 import {isUndefined} from "util";
-import {resolveTxt} from "dns";
 import events = require('events');
 
 export interface ISBIEvent {
-    on(event: 'set', listener: (box: BoxBase) => void): this;
+    on(event: 'box_set', listener: (box: BoxBase) => void): this;
     on(event: string, listener: Function): this;
 }
 
@@ -79,7 +78,7 @@ export default class SBI extends events.EventEmitter implements ISBIEvent {
         if (storage) {
             storage[box.key] = boxObj;
         }
-        this.emit('set', boxObj);
+        this.emit('box_set', boxObj);
         return boxObj;
     }
 

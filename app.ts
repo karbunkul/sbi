@@ -1,12 +1,11 @@
-import SBI from "./lib/main";
+import SBI, {BoxBase} from './lib/main';
 import * as env2conf from 'env2conf';
-import {type} from "os";
 
 const conf = env2conf.load({});
 const sbi = new SBI();
 
-sbi.on('set', (obj) => {
-    console.log(obj, 'on set box');
+sbi.on('box_set', (obj) => {
+    console.log((<BoxBase>obj).item(), 'on set box');
 });
 
 sbi.set({key: 'config', value: {
